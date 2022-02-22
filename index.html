@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>MyPaint</title>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="nav-list">
+            <li class="nav-list-item" id="menu">
+                <span class="nav-list-item__span">
+                    Файл
+                </span>
+                <img class="arrow" src="img/arrow.svg" alt="">
+            </li>
+            <li class="nav-list-item" id="showOpenedFiles">
+                <span class="nav-list-item__span" id="name">
+                    Создать рисунок
+                </span>
+                <img class="arrow" src="img/arrow.svg" alt="">
+            </li>
+            <li class="nav-list-item" id="instruments">
+                <span class="nav-list-item__span">
+                    Инструменты
+                </span>
+                <img class="arrow" src="img/arrow.svg" alt="">
+            </li>
+        </ul>
+    </nav>
+    <div class="canvas__wrapper" id="holder" oncontextmenu="return false" style="cursor: url('img/cursor.png') 9 9, auto;" hidden>
+        <canvas class="canvas__back" width="1196" height="796" id="backCanvas"></canvas>
+    </div>
+    <div class="dropdown hidden" id="dropdownFile">
+        <ul class="dropdown__list">
+            <li class="dropdown__list-item">
+                <button class="dropdown__list-btn" id="create">
+                    Создать
+                </button>
+            </li>
+            <li class="dropdown__list-item">
+                <button class="dropdown__list-btn" id="save" disabled>
+                    Сохранить
+                </button>
+            </li>
+            <li class="dropdown__list-item">
+                <button class="dropdown__list-btn" id="saveas" disabled>
+                    Сохранить как
+                </button>
+            </li>
+            <li class="dropdown__list-item">
+                <button class="dropdown__list-btn" id="insert" disabled>
+                    Вставить из
+                </button>
+            </li>
+            <li class="dropdown__list-item">
+                <button class="dropdown__list-btn" id="about">
+                    О программе
+                </button>
+            </li>
+            <li class="dropdown__list-item" id="exit">
+                <button class="dropdown__list-btn">
+                    Выход
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="dropdown dropdown__files hidden" id="openedFiles">
+        <ul class="dropdown__list" id="openedFilesList">
+            <li class="dropdown__list-item">
+                <button class="dropdown__list-btn" id="createFileBtn">
+                    Создать новый файл
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="instruments shifted" id="instrumentsDropdown">
+        <div class="options__top">
+            <h1 class="title">Рисование</h1>
+            <div class="section draw">
+                <h3 class="option" id="drawOption">Ручка</h3>
+                <div class="draw__options">
+                    <div class="options__switch" id="instrumentChoose">
+                        <div class="option__highlight" id="highlight"></div>
+                        <button class="option__btn selected" data-number="0" data-figure="Ручка">
+                            <svg width="43" height="43" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.0376 34.782L35.2857 15.5338M35.2857 15.5338L27.1654 7.41353M35.2857 15.5338L38.2932 18.5414L27.7669 29.0677M27.1654 7.41353L31.9774 2.6015L34.6842 5.30827M27.1654 7.41353L24.4586 10.1203M2.20301 40.1955L4.00752 30.5714L24.4586 10.1203M2.20301 40.1955L10.6241 39.594L13.3308 37.4887L7.91729 32.0752M2.20301 40.1955L1 41.3985M37.6917 13.1278L40.0977 10.7218L34.6842 5.30827M34.6842 5.30827L37.9925 2L41 5.00752L39.1955 6.81203M24.4586 10.1203L28.6692 14.3308" stroke="#2C2C2C" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <button class="option__btn" data-number="1" data-figure="Ластик">
+                            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.31579 20.1579L16.2105 28.0526L12.2632 32L2 21.7368L17.7895 5.94737M17.7895 5.94737L21.7368 2L32 12.2632L19.3684 24.8947M17.7895 5.94737L28.0526 16.2105" stroke="#2C2C2C" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <button class="option__btn" data-number="2" data-figure="Линия">
+                            <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 41L41 1" stroke="#2C2C2C" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <button class="option__btn" data-number="3" data-figure="Эллипс">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="20" cy="20" r="19" stroke="#2C2C2C" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <button class="option__btn" data-number="4" data-figure="Звезда">
+                            <svg width="48" height="46" viewBox="0 0 48 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 3.23607L28.6618 17.5836L28.8863 18.2746H29.6129H44.6987L32.494 27.1418L31.9062 27.5689L32.1307 28.2599L36.7925 42.6074L24.5878 33.7401L24 33.3131L23.4122 33.7401L11.2075 42.6074L15.8693 28.2599L16.0938 27.5689L15.506 27.1418L3.30127 18.2746H18.3871H19.1137L19.3382 17.5836L24 3.23607Z" stroke="#2C2C2C" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <button class="option__btn" data-number="5" data-figure="Масштаб-">
+                            <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle r="18" transform="matrix(-1 0 0 1 20 20)" stroke="#2C2C2C" stroke-width="4"/>
+                                <path d="M33 33L51 51" stroke="#2C2C2C" stroke-width="4" stroke-linecap="round"/>
+                                <path d="M28 20L20 20L12 20" stroke="#2C2C2C" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="option__btn" data-number="6" data-figure="Масштаб+">
+                            <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle r="18" transform="matrix(-1 0 0 1 20 20)" stroke="#2C2C2C" stroke-width="4"/>
+                                <path d="M33 33L51 51" stroke="#2C2C2C" stroke-width="4" stroke-linecap="round"/>
+                                <path d="M28 20L20 20L12 20" stroke="#2C2C2C" stroke-width="4" stroke-linecap="round"/>
+                                <path d="M20 28L20 20L20 12" stroke="#2C2C2C" stroke-width="4" stroke-linecap="round"/>
+                            </svg>   
+                        </button>
+                    </div>
+                    <div class="options__switch-line">
+                        <div class="options__switch-underline" id="highlightUnderline"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <h3 class="option">Толщина</h3>
+                <div class="width">
+                    <div class="width__scale" id="widthWrapper">
+                        <div class="width__line" id="widthLine">
+                            <div class="width__line-complete" id="widthComplete"></div>
+                        </div>
+                        <div class="width__drag" id="widthDrag"></div>
+                    </div>
+                    <div class="input__wrapper">
+                        <input type="text" class="input-no-border" id="widthInput" value="3" maxlength="2">
+                        <span class="input__placeholder">пкс.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section vertex shifted" id="vertex">
+                <h3 class="option">Вершины</h3>
+                <div class="vertex__counter">
+                    <button class="vertex__counter-btn" onclick="vertexNumber.value = vertexNumber.value < 4 ? vertexNumber.value : vertexNumber.value - 1">
+                        <svg width="24" height="4" viewBox="0 0 24 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 3.5C22.8284 3.5 23.5 2.82843 23.5 2C23.5 1.17157 22.8284 0.500001 22 0.500001V3.5ZM2 0.5C1.17157 0.5 0.5 1.17157 0.5 2C0.5 2.82843 1.17157 3.5 2 3.5L2 0.5ZM22 0.500001L2 0.5L2 3.5L22 3.5V0.500001Z" fill="#2C2C2C"/>
+                        </svg> 
+                    </button>
+                    <input type="text" class="input" value="5" maxlength="2" id="vertexNumber">
+                    <button class="vertex__counter-btn" onclick="vertexNumber.value = vertexNumber.value > 19 ? vertexNumber.value : +vertexNumber.value + 1">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.7703 2C13.7703 1.17157 13.0987 0.5 12.2703 0.5C11.4418 0.5 10.7703 1.17157 10.7703 2H13.7703ZM10.7703 22C10.7703 22.8284 11.4418 23.5 12.2703 23.5C13.0987 23.5 13.7703 22.8284 13.7703 22H10.7703ZM22 13.2297C22.8284 13.2297 23.5 12.5582 23.5 11.7297C23.5 10.9013 22.8284 10.2297 22 10.2297L22 13.2297ZM2 10.2297C1.17157 10.2297 0.5 10.9013 0.5 11.7297C0.5 12.5582 1.17157 13.2297 2 13.2297L2 10.2297ZM10.7703 2V22H13.7703V2H10.7703ZM22 10.2297L2 10.2297L2 13.2297L22 13.2297L22 10.2297Z" fill="#2C2C2C"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="options__bottom">
+            <div class="section color">
+                <h3 class="option">Цвет</h3>
+                <div class="color-row">
+                    <input class="color-wrapper color__current" id="colorPicker" type="color" value="#000000">
+                    <div class="color__input-wrapper">
+                        <span class="color__input-placeholder">#</span>
+                        <input id="currentColor" type="text" class="color__input" value="000000" maxlength="6">
+                    </div>
+                </div>
+                <div class="color-row">
+                    <div class="color-wrapper color__choose" style="background-color: #FFFFFF;" data-color="#FFFFFF"></div>
+                    <div class="color-wrapper color__choose" style="background-color: #E0E0E0;" data-color="#E0E0E0"></div>
+                    <div class="color-wrapper color__choose" style="background-color: #000000;" data-color="#000000"></div>
+                    <div class="color-wrapper color__choose" style="background-color: #FF0000;" data-color="#FF0000"></div>
+                    <div class="color-wrapper color__choose" style="background-color: #00FF00;" data-color="#00FF00"></div>
+                </div>
+                <div class="color-row">
+                    <div class="color-wrapper color__choose" style="background-color: #0000FF;" data-color="#0000FF"></div>
+                    <div class="color-wrapper color__choose" style="background-color: #BB6BD9;" data-color="#BB6BD9"></div>
+                    <div class="color-wrapper color__choose" style="background-color: #56CCF2;" data-color="#56CCF2"></div>
+                    <div class="color-wrapper color__choose" style="background-color: #F2C94C;" data-color="#F2C94C"></div>
+                    <div class="color-wrapper color__choose" style="background-color: #F2994A;" data-color="#F2994A"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+    <script src="render.js"></script>
+</body>
+</html>
